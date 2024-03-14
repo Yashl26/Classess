@@ -1,25 +1,36 @@
 #include <iostream>
-#include <string>
 
-class Employee {
+class BankAccount {
 private:
-    std::string name;
-    int employeeId;
-    float salary;
+    std::string accountNumber;
+    float balance;
 
 public:
-    Employee(std::string n, int id, float s) : name(n), employeeId(id), salary(s) {}
+    BankAccount(std::string accNum, float bal) : accountNumber(accNum), balance(bal) {}
 
-    void displayInfo() {
-        std::cout << "Name: " << name << std::endl;
-        std::cout << "Employee ID: " << employeeId << std::endl;
-        std::cout << "Salary: " << salary << std::endl;
+    void deposit(float amount) {
+        balance += amount;
+    }
+
+    void withdraw(float amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            std::cout << "Insufficient balance!" << std::endl;
+        }
+    }
+
+    void displayBalance() {
+        std::cout << "Account Number: " << accountNumber << std::endl;
+        std::cout << "Balance: " << balance << std::endl;
     }
 };
 
 int main() {
-    Employee emp("John Doe", 12345, 50000);
-    emp.displayInfo();
+    BankAccount acc("123456789", 1000);
+    acc.deposit(500);
+    acc.withdraw(200);
+    acc.displayBalance();
 
     return 0;
 }
